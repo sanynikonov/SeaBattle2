@@ -1,23 +1,61 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using SeaBattle2.Cli;
+using System.Text;
 
 Console.WriteLine("Hello, World!");
 
 var grid = Grid.Initialize(new List<Ship> {Ship.Horizontal(new Cell(0, 0), 4)});
+var grid2 = Grid.Initialize(new List<Ship> { Ship.Horizontal(new Cell(0, 0), 4) });
 
-while (grid.PlayableCells.Any())
+var board = Board.Initialize(grid, grid2);
+
+while (!board.GameEnded)
 {
-    WriteGrid(grid);
+    PrintBoard(board);
+
+    Console.WriteLine("Current player: " + board.CurrentTurn);
 
     var point = ConsoleHelper.GetPointAnswer();
 
-    grid = grid.Shoot(point.X, point.Y);
+    board = board.Shoot(point.X, point.Y);
 }
-WriteGrid(grid);
+PrintBoard(board);
 
 Console.WriteLine("Game over.");
 
-static void WriteGrid(Grid grid)
+static void PrintBoard(Board board)
+{
+    var sb = new StringBuilder();
+
+    var firstPlayerName = "Player 1";
+
+    var domainRow = Enumerable.Range(0, Constants.GridDimension).Aggregate("", (tmp, x) => $"{tmp} {x}");
+    var difference = domainRow.Length - firstPlayerName.Length;
+
+    var freeSpaceBetweenFields = difference < 0 ? new string(' ', -difference) : "";
+
+    var firstView = Prepare(board.First);
+    var secondView = Prepare(board.Second);
+
+    sb.Append("\t  " + domainRow + freeSpaceBetweenFields + "\t\t  " + domainRow + "\n");
+
+    for (int i = 0; i < Constants.GridDimension; i++)
+    {
+        sb.Append($"\t{i}|");
+
+        sb.Append(DrawFieldRow(firstView, i));
+
+        sb.Append($"{freeSpaceBetweenFields}\t\t{i}|");
+
+        sb.Append(DrawFieldRow(secondView, i));
+
+        sb.Append("\n");
+    }
+
+    Console.WriteLine(sb.ToString());
+}
+
+static char[,] Prepare(Grid grid)
 {
     var output = new char[Constants.GridDimension, Constants.GridDimension];
 
@@ -36,12 +74,20 @@ static void WriteGrid(Grid grid)
         output[row, column] = '·';
     }
 
-    for (var i = 0; i < output.GetLength(0); i++)
+    return output;
+}
+
+
+static string DrawFieldRow(char[,] field, int row)
+{
+    var builder = new StringBuilder();
+
+    for (int column = 0; column < Constants.GridDimension; column++)
     {
-        for (int j = 0; j < output.GetLength(1); j++)
-        {
-            Console.Write(output[i, j]);
-        }
-        Console.WriteLine();
+        builder.Append(' ');
+
+        builder.Append(field[row, column]);
     }
+
+    return builder.ToString();
 }

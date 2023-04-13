@@ -2,7 +2,42 @@
 
 namespace SeaBattle2.Cli;
 
-//public record Board(int id, Cell[,] cells, int playerId);
+public class Board
+{
+    public Grid First { get; }
+    public Grid Second { get; }
+
+    public enum Turn
+    {
+        Player1,
+        Player2
+    }
+
+    public Turn CurrentTurn { get; }
+
+    private Grid CurrentPlayerGrid => CurrentTurn == Turn.Player1 ? First : Second;
+
+    private Board(Grid first, Grid second, Turn nextTurn) => (First, Second, CurrentTurn) = (first, second, nextTurn);
+
+    public bool GameEnded => !(First.PlayableCells.Any() && Second.PlayableCells.Any());
+
+    public static Board Initialize(Grid first, Grid second) => new(first, second, Turn.Player1);
+
+    public Board Shoot(int row, int column) =>
+        GameEnded
+            ? new Board(First, Second, CurrentTurn)
+            : new Board(
+                TryShoot(row, column, First),
+                TryShoot(row, column, Second),
+                NextTurn);
+
+    private Grid TryShoot(int row, int column, Grid grid) => 
+        grid == CurrentPlayerGrid
+            ? grid.Shoot(row, column)
+            : grid;
+
+    private Turn NextTurn => CurrentTurn == Turn.Player1 ? Turn.Player2 : Turn.Player1;
+}
 
 public class Grid
 {
@@ -123,13 +158,12 @@ public static class EnumerableExt
     }
 
     /// <summary>
-    /// Checks whether first sequence is subset of second
-    /// consisting of a single item.
+    /// Checks whether the first sequence is a subset of the second
     /// </summary>
     /// <typeparam name="T"> Type of the object. </typeparam>
     /// <param name="first"> The first sequence checked to be a subset. </param>
     /// <param name="second"> The second sequence checked to be a superset. </param>
-    /// <returns> An IEnumerable&lt;T&gt; consisting of a single item. </returns>
+    /// <returns> true if the first sequence is a subset of the second; otherwise, false. </returns>
     public static bool SubsetOf<T>(this IEnumerable<T> first, IEnumerable<T> second) =>
         !first.Except(second).Any();
 }
