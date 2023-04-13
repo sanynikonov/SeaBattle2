@@ -1,0 +1,15 @@
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\bin\Debug\net7.0\SeaBattle2.Cli.exe
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\bin\Debug\net7.0\SeaBattle2.Cli.deps.json
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\bin\Debug\net7.0\SeaBattle2.Cli.runtimeconfig.json
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\bin\Debug\net7.0\SeaBattle2.Cli.dll
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\bin\Debug\net7.0\SeaBattle2.Cli.pdb
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.csproj.AssemblyReference.cache
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.GeneratedMSBuildEditorConfig.editorconfig
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.AssemblyInfoInputs.cache
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.AssemblyInfo.cs
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.csproj.CoreCompileInputs.cache
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.dll
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\refint\SeaBattle2.Cli.dll
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.pdb
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\SeaBattle2.Cli.genruntimeconfig.cache
+F:\Programming\CS\SeaBattle2\SeaBattle2.Cli\obj\Debug\net7.0\ref\SeaBattle2.Cli.dll
